@@ -3,18 +3,19 @@ import './scss/app.scss'
 import Header from './components/Header'
 import PizzaBlock from './components/PizzaBlock'
 import pizzas from './pizzas.json'
+import React from 'react'
 
 function App() {
 	return (
 		<div className="App">
-			<div class="wrapper">
+			<div className="wrapper">
 				<Header />
-				<div class="content">
-					<div class="container">
-						<div class="content__top">
+				<div className="content">
+					<div className="container">
+						<div className="content__top">
 							<Categories />
-							<div class="sort">
-								<div class="sort__label">
+							<div className="sort">
+								<div className="sort__label">
 									<svg
 										width="10"
 										height="6"
@@ -30,18 +31,20 @@ function App() {
 									<b>Сортировка по:</b>
 									<span>популярности</span>
 								</div>
-								<div class="sort__popup">
+								<div className="sort__popup">
 									<ul>
-										<li class="active">популярности</li>
+										<li className="active">популярности</li>
 										<li>цене</li>
 										<li>алфавиту</li>
 									</ul>
 								</div>
 							</div>
 						</div>
-						<h2 class="content__title">Все пиццы</h2>
-						<div class="content__items">
-							<PizzaBlock pizzas={pizzas} />
+						<h2 className="content__title">Все пиццы</h2>
+						<div className="content__items">
+							{
+								pizzas.map((obj) => <PizzaBlock title={obj.title} price={obj.price} imageUrl={obj.imageUrl} sizes= {obj.sizes}/>)
+							}
 						</div>
 					</div>
 				</div>

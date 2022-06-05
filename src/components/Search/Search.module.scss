@@ -5,17 +5,36 @@
 .input {
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	padding: 12px 20px;
-	padding-left: 30px;
-	width: 300px;
+	padding-left: 40px;
+	width: 33vw;
 	border-radius: 10px;
 	font-size: 16px;
+
+	&:focus {
+		border: 1px solid rgba(0, 0, 0, 0.2);
+	}
 }
 
 .icon {
 	position: absolute;
-	width: 24px;
-	height: 24px;
-	opacity: 0.5;
+	width: 22px;
+	height: 22px;
+	opacity: 0.3;
 	left: 12px;
 	top: 12px;
+}
+.clearIcon {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	opacity: 0.3;
+	right: 6px;
+	top: 4px;
+	padding: 6px;
+	cursor: pointer;
+	transition: all 0.1s ease 0s;
+
+	&:hover {
+		opacity: 0.6;
+	}
 }

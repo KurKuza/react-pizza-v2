@@ -7,14 +7,16 @@ import Categories from '../components/Categories'
 import Pagination from '../components/Search/Pagination/Pagination'
 import { SearchContext } from '../App'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCategoryId } from '../Redux/slices/filterSlice'
 
 function Home() {
+	const dispatch = useDispatch()
 	const categoryId = useSelector((state) => state.filter.categoryId)
 
-	console.log('redux state',categoryId)
-
 	const setCategoryId = () => {}
+
+	console.log('id category', categoryId)
 
 	const { searchValue } = React.useContext(SearchContext)
 	const [items, setItems] = React.useState([])
@@ -27,7 +29,8 @@ function Home() {
 	})
 
 	const onClickCategory = (id) => {
-		console.log(id);
+		console.log(id)
+		dispatch(setCategoryId(id))
 	}
 
 	const category = categoryId > 0 ? `category=${categoryId}` : ''
@@ -67,10 +70,7 @@ function Home() {
 	return (
 		<div className='container'>
 			<div className='content__top'>
-				<Categories
-					value={categoryId}
-					onClickCategory={onClickCategory}
-				/>
+				<Categories value={categoryId} onClickCategory={onClickCategory} />
 				<Sort value={sortType} onChangeSort={(i) => setSortType(i)} />
 			</div>
 			<h2 className='content__title'>Все пиццы</h2>

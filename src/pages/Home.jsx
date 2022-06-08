@@ -7,11 +7,19 @@ import Categories from '../components/Categories'
 import Pagination from '../components/Search/Pagination/Pagination'
 import { SearchContext } from '../App'
 
+import { useSelector } from 'react-redux'
+
 function Home() {
+	const categoryId = useSelector((state) => state.filter.categoryId)
+
+	console.log('redux state',categoryId)
+
+	const setCategoryId = () => {}
+
 	const { searchValue } = React.useContext(SearchContext)
 	const [items, setItems] = React.useState([])
 	const [isLoading, setIsLoading] = React.useState(true)
-	const [categoryId, setCategoryId] = React.useState(0)
+	// const [categoryId, setCategoryId] = React.useState(0)
 	const [currentPage, setCurrentPage] = React.useState(1)
 	const [sortType, setSortType] = React.useState({
 		name: 'популярности',

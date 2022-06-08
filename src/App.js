@@ -1,5 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from './Redux/slices/filterSlice'
 
 import './scss/app.scss'
 import Header from './components/Header'

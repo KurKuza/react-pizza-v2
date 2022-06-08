@@ -26,6 +26,10 @@ function Home() {
 		sortProperty: 'rating',
 	})
 
+	const onClickCategory = (id) => {
+		console.log(id);
+	}
+
 	const category = categoryId > 0 ? `category=${categoryId}` : ''
 	const sortBy = sortType.sortProperty.replace('-', '')
 	const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc'
@@ -65,7 +69,7 @@ function Home() {
 			<div className='content__top'>
 				<Categories
 					value={categoryId}
-					onClickCategory={(i) => setCategoryId(i)}
+					onClickCategory={onClickCategory}
 				/>
 				<Sort value={sortType} onChangeSort={(i) => setSortType(i)} />
 			</div>

@@ -6,10 +6,6 @@ function PizzaBlock({ title, price, imageUrl, sizes, types }) {
 
 	const typeNames = ['тонкое', 'традиционное']
 
-	const onClickType = (i) => {
-		setActiveType(i)
-	}
-
 	const onClickSize = (i) => {
 		setActiveSize(i)
 	}

@@ -1,21 +1,29 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { addItem, removeItem } from '../Redux/slices/cartSlice'
 
-function CartItem() {
+function CartItem({ id, title, type, price, count, imageUrl }) {
+	const dispatch = useDispatch()
+
+	const onClickPlus = () => {
+		dispatch(addItem({ id }))
+	}
+
+	const onClickMinus = () => {
+		dispatch(removeItem(id))
+	}
+
 	return (
-		<div class='cart__item'>
-			<div class='cart__item-img'>
-				<img
-					class='pizza-block__image'
-					src='https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-					alt='Pizza'
-				/>
+		<div className='cart__item'>
+			<div className='cart__item-img'>
+				<img className='pizza-block__image' src={imageUrl} alt='Pizza' />
 			</div>
-			<div class='cart__item-info'>
-				<h3>Сырный цыпленок</h3>
-				<p>тонкое тесто, 26 см.</p>
+			<div className='cart__item-info'>
+				<h3>{title}</h3>
+				<p>{type}, 26 см.</p>
 			</div>
-			<div class='cart__item-count'>
-				<div class='button button--outline button--circle cart__item-count-minus'>
+			<div className='cart__item-count'>
+				<div onClick={onClickMinus} className='button button--outline button--circle cart__item-count-minus'>
 					<svg
 						width='10'
 						height='10'
@@ -32,8 +40,8 @@ function CartItem() {
 						/>
 					</svg>
 				</div>
-				<b>2</b>
-				<div class='button button--outline button--circle cart__item-count-plus'>
+				<b>{count}</b>
+				<div onClick={onClickPlus} className='button button--outline button--circle cart__item-count-plus'>
 					<svg
 						width='10'
 						height='10'
@@ -51,11 +59,11 @@ function CartItem() {
 					</svg>
 				</div>
 			</div>
-			<div class='cart__item-price'>
-				<b>770 ₽</b>
+			<div className='cart__item-price'>
+				<b>{price * count} ₽</b>
 			</div>
-			<div class='cart__item-remove'>
-				<div class='button button--outline button--circle'>
+			<div className='cart__item-remove'>
+				<div className='button button--outline button--circle'>
 					<svg
 						width='10'
 						height='10'

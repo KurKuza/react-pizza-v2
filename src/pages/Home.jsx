@@ -42,16 +42,17 @@ function Home() {
 	const order = sortType.includes('-') ? 'asc' : 'desc'
 	const search = searchValue ? `&search=${searchValue}` : ''
 
-	const fetchPizzas = () => {
+	const fetchPizzas = async () => {
 		setIsLoading(true)
-		axios
-			.get(
+		try {
+			const res = await axios.get(
 				`https://62939b5d7aa3e6af1a0e3954.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
 			)
-			.then((res) => {
-				setItems(res.data)
-				setIsLoading(false)
-			})
+			setItems(res.data)
+			setIsLoading(false)
+		} catch (err) {
+		}
+			
 	}
 
 	//Если изменили параметры и был первый рендер
@@ -68,7 +69,6 @@ function Home() {
 
 		isMounted.current = true
 	}, [category, sortType, currentPage])
-
 
 	//Если был первый рендер, то проверяем url-параметры и сохраняем в редуксе
 	React.useEffect(() => {

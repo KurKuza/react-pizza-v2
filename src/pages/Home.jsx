@@ -49,10 +49,12 @@ function Home() {
 				`https://62939b5d7aa3e6af1a0e3954.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
 			)
 			setItems(res.data)
+		} catch (error) {
+			console.log('ERROR', error)
+			alert('Ошибка при получении пицц')
+		} finally {
 			setIsLoading(false)
-		} catch (err) {
 		}
-			
 	}
 
 	//Если изменили параметры и был первый рендер

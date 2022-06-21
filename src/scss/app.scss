@@ -3,6 +3,13 @@
 
 @import 'components/all';
 
+@media (min-width: 940px) {
+	html {
+		margin-right: 0;
+		margin-left: calc(100vw - 100%);
+	}
+}
+
 body {
 	background-color: $background;
 }

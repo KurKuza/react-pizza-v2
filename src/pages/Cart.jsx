@@ -1,11 +1,26 @@
 import React from 'react'
-import {  useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CartItem from '../components/CartItem'
+import { clearItems } from '../Redux/slices/cartSlice'
+import { Link } from 'react-router-dom'
+import CartEmpty from '../components/CartEmpty'
 
 function Cart() {
-	// const dispatch = useDispatch()
-	const items = useSelector((state) => state.cart.items)
-	console.log(items);
+	const dispatch = useDispatch()
+	const { totalPrice, items } = useSelector((state) => state.cart)
+
+	const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+
+	const onClickClear = () => {
+		if (window.confirm('Очистить корзину?')) {
+			dispatch(clearItems())
+		}
+	}
+
+	if(!totalPrice){
+		return <CartEmpty/>
+	}
+
 	return (
 		<div className='container container--cart'>
 			<div className='cart'>
@@ -41,7 +56,7 @@ function Cart() {
 						</svg>
 						Корзина
 					</h2>
-					<div className='cart__clear'>
+					<button onClick={onClickClear} className='cart__clear'>
 						<svg
 							width='20'
 							height='20'
@@ -77,9 +92,8 @@ function Cart() {
 								strokeLinejoin='round'
 							/>
 						</svg>
-
 						<span>Очистить корзину</span>
-					</div>
+					</button>
 				</div>
 				<div className='content__items cart'>
 					{items.map((item) => (
@@ -89,14 +103,16 @@ function Cart() {
 				<div className='cart__bottom'>
 					<div className='cart__bottom-details'>
 						<span>
-							Всего пицц: <b>3 шт.</b>
+							Всего пицц: <b>{totalCount} шт.</b>
 						</span>
 						<span>
-							Сумма заказа: <b>{items.map(item => item.price * item.count)} ₽</b>
+							Сумма заказа: <b>{totalPrice} ₽</b>
 						</span>
 					</div>
 					<div className='cart__bottom-buttons'>
-						<a href='/' className='button button--outline button--add go-back-btn'>
+						<Link
+							to='/'
+							className='button button--outline button--add go-back-btn'>
 							<svg
 								width='8'
 								height='14'
@@ -111,9 +127,8 @@ function Cart() {
 									strokeLinejoin='round'
 								/>
 							</svg>
-
 							<span>Вернуться назад</span>
-						</a>
+						</Link>
 						<div className='button pay-btn'>
 							<span>Оплатить сейчас</span>
 						</div>

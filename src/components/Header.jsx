@@ -24,8 +24,7 @@ function Header() {
 				<Search />
 				<div className='header__cart'>
 					<Link to='/cart' className='button button--cart'>
-						<span>{totalPrice} ₽</span>
-						<div className='button__delimiter'></div>
+						{totalPrice === 0 ? '' : <div className='cart-fdr'><span>{totalPrice} ₽</span> <div className='button__delimiter'></div></div>}
 						<svg
 							width='18'
 							height='18'

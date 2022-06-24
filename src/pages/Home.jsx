@@ -15,6 +15,7 @@ import Skeleton from '../components/PizzaBlock/Skeleton'
 import Categories from '../components/Categories'
 import Pagination from '../components/Pagination/Pagination'
 import { SearchContext } from '../App'
+import { setItems } from '../Redux/slices/pizzaSlice'
 
 function Home() {
 	const navigate = useNavigate()
@@ -22,11 +23,11 @@ function Home() {
 	const isSearch = React.useRef(false)
 	const isMounted = React.useRef(false)
 
+	const items = useSelector((state) => state.pizza.items)
 	const { categoryId, sort, currentPage } = useSelector((state) => state.filter)
 	const sortType = sort.sortProperty
 
 	const { searchValue } = React.useContext(SearchContext)
-	const [items, setItems] = React.useState([])
 	const [isLoading, setIsLoading] = React.useState(true)
 
 	const onClickCategory = (id) => {
@@ -45,10 +46,10 @@ function Home() {
 	const fetchPizzas = async () => {
 		setIsLoading(true)
 		try {
-			const res = await axios.get(
+			const { data } = await axios.get(
 				`https://62939b5d7aa3e6af1a0e3954.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
 			)
-			setItems(res.data)
+			dispatch(setItems(data))
 		} catch (error) {
 			console.log('ERROR', error)
 			alert('Ошибка при получении пицц')

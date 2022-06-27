@@ -13,7 +13,6 @@ import Sort, { sortList } from '../components/Sort'
 import Skeleton from '../components/PizzaBlock/Skeleton'
 import Categories from '../components/Categories'
 import Pagination from '../components/Pagination/Pagination'
-import { SearchContext } from '../App'
 import { fetchPizzas } from '../Redux/slices/pizzaSlice'
 
 function Home() {
@@ -26,7 +25,6 @@ function Home() {
 	const { categoryId, sort, currentPage } = useSelector((state) => state.filter)
 	const sortType = sort.sortProperty
 
-	const { searchValue } = React.useContext(SearchContext)
 
 	const onClickCategory = (id) => {
 		dispatch(setCategoryId(id))

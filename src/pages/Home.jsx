@@ -7,6 +7,7 @@ import {
 	setCategoryId,
 	setCurrentPage,
 	setFilters,
+	setSearchValue,
 } from '../Redux/slices/filterSlice'
 import PizzaBlock from '../components/PizzaBlock'
 import Sort, { sortList } from '../components/Sort'
@@ -16,6 +17,7 @@ import Pagination from '../components/Pagination/Pagination'
 import { fetchPizzas } from '../Redux/slices/pizzaSlice'
 
 function Home() {
+	const {searchValue} = useSelector((state) => state.filter)
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const isSearch = React.useRef(false)
@@ -24,7 +26,6 @@ function Home() {
 	const { items, status } = useSelector((state) => state.pizza)
 	const { categoryId, sort, currentPage } = useSelector((state) => state.filter)
 	const sortType = sort.sortProperty
-
 
 	const onClickCategory = (id) => {
 		dispatch(setCategoryId(id))
@@ -37,7 +38,7 @@ function Home() {
 	const category = categoryId > 0 ? `category=${categoryId}` : ''
 	const sortBy = sortType.replace('-', '')
 	const order = sortType.includes('-') ? 'asc' : 'desc'
-	const search = searchValue ? `&search=${searchValue}` : ''
+	const search = setSearchValue ? `&search=${searchValue}` : ''
 
 	const getPizzas = async () => {
 		dispatch(fetchPizzas({ category, sortBy, order, search, currentPage }))

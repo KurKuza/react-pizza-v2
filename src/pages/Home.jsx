@@ -17,7 +17,9 @@ import Pagination from '../components/Pagination/Pagination'
 import { fetchPizzas } from '../Redux/slices/pizzaSlice'
 
 function Home() {
-	const {searchValue} = useSelector((state) => state.filter)
+	const searchValue = useSelector((state) => state.filter.searchValue)
+  console.log('> searchValue', searchValue)
+
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const isSearch = React.useRef(false)

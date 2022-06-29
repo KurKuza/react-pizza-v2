@@ -18,7 +18,6 @@ import { fetchPizzas } from '../Redux/slices/pizzaSlice'
 
 function Home() {
 	const searchValue = useSelector((state) => state.filter.searchValue)
-  console.log('> searchValue', searchValue)
 
 	const navigate = useNavigate()
 	const dispatch = useDispatch()

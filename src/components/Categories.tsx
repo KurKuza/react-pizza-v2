@@ -9,8 +9,12 @@ const categories = [
 	'Закрытые',
 ]
 
-function Categories({value, onClickCategory}) {
+type CategoriesProps = {
+	value: number
+	onClickCategory: (i: number) => void
+}
 
+const Categories: React.FC<CategoriesProps> = ({ value, onClickCategory }) => {
 	return (
 		<div className='categories'>
 			<ul>
@@ -18,8 +22,7 @@ function Categories({value, onClickCategory}) {
 					<li
 						key={i}
 						onClick={() => onClickCategory(i)}
-						className={value === i ? 'active' : ''}
-						>
+						className={value === i ? 'active' : ''}>
 						{categoryName}
 					</li>
 				))}

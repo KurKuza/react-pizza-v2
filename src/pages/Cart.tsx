@@ -5,11 +5,14 @@ import { clearItems } from '../Redux/slices/cartSlice'
 import { Link } from 'react-router-dom'
 import CartEmpty from '../components/CartEmpty'
 
-function Cart() {
+const Cart: React.FC = () => {
 	const dispatch = useDispatch()
-	const { totalPrice, items } = useSelector((state) => state.cart)
+	const { totalPrice, items } = useSelector((state: any) => state.cart)
 
-	const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+	const totalCount = items.reduce(
+		(sum: number, item: any) => sum + item.count,
+		0,
+	)
 
 	const onClickClear = () => {
 		if (window.confirm('Очистить корзину?')) {
@@ -17,8 +20,8 @@ function Cart() {
 		}
 	}
 
-	if(!totalPrice){
-		return <CartEmpty/>
+	if (!totalPrice) {
+		return <CartEmpty />
 	}
 
 	return (
@@ -96,7 +99,7 @@ function Cart() {
 					</button>
 				</div>
 				<div className='content__items cart'>
-					{items.map((item) => (
+					{items.map((item: any) => (
 						<CartItem key={item.id} {...item} />
 					))}
 				</div>

@@ -9,10 +9,24 @@ export const fetchPizzas = createAsyncThunk(
 			`https://62939b5d7aa3e6af1a0e3954.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`,
 		)
 		return data
-	}
+	},
 )
 
-const initialState = {
+type Pizza = {
+	id: number
+	title: string
+	price: number
+	imageUrl: string
+	sizes: number[]
+	types: number[]
+	rating: number
+}
+interface PizzaSliceState {
+	items: Pizza[]
+	status: 'loading' | 'succsess' | 'error'
+}
+
+const initialState: PizzaSliceState = {
 	items: [],
 	status: 'loading', //loading | succsess | error
 }
@@ -23,7 +37,7 @@ const pizzaSlice = createSlice({
 	reducers: {
 		setItems(state, action) {
 			state.items = action.payload
-		}
+		},
 	},
 	extraReducers: {
 		[fetchPizzas.pending]: (state) => {
@@ -38,7 +52,7 @@ const pizzaSlice = createSlice({
 			state.status = 'error'
 			state.items = []
 		},
-	}
+	},
 })
 
 export const { setItems } = pizzaSlice.actions
